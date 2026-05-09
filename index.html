@@ -301,10 +301,18 @@
   }
   .stop h3{font-size:1.5rem;color:#fff;margin-bottom:.15rem;line-height:1.15}
   .stop .role{color:var(--mb-silver);font-size:.92rem;margin-bottom:.9rem;font-weight:500}
+  .stop .block{margin-top:.9rem}
+  .stop .block-label{
+    display:inline-block;
+    font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--mb-blue);font-weight:600;
+    margin-bottom:.25rem;
+  }
+  .stop .block p{font-size:.88rem;color:#cfd3d8;margin:0}
   .stop ul{list-style:none;padding:0}
   .stop ul li{
-    position:relative;padding-left:1.2rem;font-size:.9rem;
-    color:#cfd3d8;margin-bottom:.4rem;
+    position:relative;padding-left:1.2rem;font-size:.88rem;
+    color:#cfd3d8;margin-bottom:.35rem;line-height:1.5;
   }
   .stop ul li::before{
     content:"";position:absolute;left:0;top:.55rem;
@@ -802,7 +810,7 @@
 <section class="journey">
   <div class="journey-header">
     <h2>La ruta hasta aquí</h2>
-    <p>Cada parada ha sumado kilómetros, idiomas, plantas industriales y equipos. Estas son las que más han marcado el viaje.</p>
+    <p>No un repaso cronológico del CV: una mirada reflexiva sobre cómo ha evolucionado mi rol como HRBP, con quién he trabajado en cada etapa, qué decisiones marcaron el rumbo y qué he aportado al negocio.</p>
   </div>
 
   <div class="timeline" id="timeline">
@@ -873,15 +881,22 @@
     <div class="stop">
       <div class="pin"></div>
       <div class="card">
-        <span class="year">2007 — 2014 · Salida</span>
-        <h3>Universidad &amp; primeros kilómetros</h3>
-        <div class="role">Formación + prácticas en multinacionales</div>
-        <p class="narrator">El motor arranca en la Universidad Rey Juan Carlos. Diploma en Relaciones Laborales y, después, el Máster en Asesoría Laboral en EFEM.</p>
-        <ul>
-          <li>Diplomatura en Relaciones Laborales (URJC, 2007–2010)</li>
-          <li>Máster en Asesoría Laboral (EFEM, 2013–2014)</li>
-          <li>Primeras paradas formativas: Schneider Electric, Accenture, Sacyr Vallehermoso, Bricomart, Asic Group y Unique ETT</li>
-        </ul>
+        <span class="year">2007 — 2016 · Salida</span>
+        <h3>Formación &amp; primeros kilómetros</h3>
+        <div class="role">Aprender el oficio en muchos contextos a la vez</div>
+        <p class="narrator">El motor arranca despacio: siete años combinando formación y prácticas en multinacionales muy distintas. Más que escalar, lo que hago aquí es <em>observar</em>.</p>
+        <div class="block">
+          <span class="block-label">Formación</span>
+          <p>Diplomatura en Relaciones Laborales (URJC, 2007–2010) y Máster en Asesoría Laboral (EFEM, 2013–2014).</p>
+        </div>
+        <div class="block">
+          <span class="block-label">Entornos</span>
+          <p>Schneider Electric, Accenture, Sacyr Vallehermoso, Bricomart, Asic Group y Unique ETT. Industria, consultoría, retail, construcción y ETT.</p>
+        </div>
+        <div class="block">
+          <span class="block-label">Aprendizaje clave</span>
+          <p>El HR no es un manual: cada cultura organizativa pide un acento distinto. Esa intuición me ha acompañado en todo el viaje.</p>
+        </div>
         <div class="tags">
           <span class="tag">Relaciones laborales</span>
           <span class="tag">Nóminas</span>
@@ -896,13 +911,24 @@
       <div class="card">
         <span class="year">Oct 2016 — Jun 2018</span>
         <h3>Unilabs</h3>
-        <div class="role">HR Generalist</div>
-        <p class="narrator">Primera ruta como generalista: la pasajera ya no observa, conduce. Asesora a managers, gestiona reestructuraciones y empieza a leer el cuadro de mandos del HR.</p>
-        <ul>
-          <li>Asesoramiento HR a managers y empleados</li>
-          <li>Selección, reestructuraciones, relaciones laborales y planes de formación</li>
-          <li>Análisis de KPIs, absentismo y costes de personal</li>
-        </ul>
+        <div class="role">HR Generalist · primera responsabilidad real</div>
+        <p class="narrator">Dejo de mirar el mapa y empiezo a conducir. Es donde descubro que el HR de verdad no es ejecutar normas, sino interpretar el negocio.</p>
+        <div class="block">
+          <span class="block-label">Contexto</span>
+          <p>Diagnóstico clínico, plantilla mixta técnica + administrativa, en plena transformación organizativa.</p>
+        </div>
+        <div class="block">
+          <span class="block-label">Interlocutores</span>
+          <p>Managers de área, empleados de toda la pirámide, comité de empresa y dirección de RRHH.</p>
+        </div>
+        <div class="block">
+          <span class="block-label">Decisiones &amp; aprendizajes</span>
+          <p>Convertir el reporting de KPIs y absentismo en una conversación con dirección, no en un informe que se guarda. El dato deja de ser archivo y pasa a ser argumento.</p>
+        </div>
+        <div class="block">
+          <span class="block-label">Contribución</span>
+          <p>Acompañé reestructuraciones y planes de formación pegados a la operativa real, no al organigrama teórico.</p>
+        </div>
         <div class="tags">
           <span class="tag">HR Advisory</span>
           <span class="tag">Cambio organizativo</span>
@@ -917,14 +943,24 @@
       <div class="card">
         <span class="year">Oct 2018 — Jun 2023</span>
         <h3>Ardagh Group</h3>
-        <div class="role">Global HR Project Lead &amp; HR Officer</div>
-        <p class="narrator">El autobús cruza fronteras. De HR Officer a Global Project Lead: lidera el rollout mundial de SAP SuccessFactors + OpenText coordinando equipos en varios países.</p>
-        <ul>
-          <li>Rollout global de OpenText integrado con SAP SuccessFactors (EC 2.0)</li>
-          <li>Diseño de estructuras documentales globales, workflows y compliance</li>
-          <li>Administración de personal y coordinación de nóminas en plantas españolas</li>
-          <li>Talento, onboarding, formación, planes de sucesión y reporting</li>
-        </ul>
+        <div class="role">HR Officer → Global HR Project Lead</div>
+        <p class="narrator">El autobús cruza fronteras. La etapa que más me hace madurar como HRBP: lidero sin mando jerárquico, todo a través de influencia, datos y paciencia.</p>
+        <div class="block">
+          <span class="block-label">Contexto</span>
+          <p>Multinacional de envases (vidrio y metal), entornos industriales en múltiples países. Doble rol: operación local + proyecto global.</p>
+        </div>
+        <div class="block">
+          <span class="block-label">Interlocutores</span>
+          <p>Equipos HR de varios países, IT global, dirección de proyecto, Plant Managers y nóminas en plantas españolas.</p>
+        </div>
+        <div class="block">
+          <span class="block-label">Decisiones &amp; aprendizajes</span>
+          <p>Acepto el rol global del rollout de OpenText + SAP SuccessFactors (EC 2.0). Aprendo que liderar sin autoridad jerárquica exige claridad, escucha y traducir cada país a un mismo lenguaje.</p>
+        </div>
+        <div class="block">
+          <span class="block-label">Contribución</span>
+          <p>Diseño de estructuras documentales globales, workflows y estándares de compliance. Soporte a talento, sucesión, onboarding y reporting en paralelo.</p>
+        </div>
         <div class="tags">
           <span class="tag">SAP SuccessFactors</span>
           <span class="tag">Proyectos globales</span>
@@ -940,13 +976,23 @@
         <span class="year">Oct 2023 — Dic 2024 · Cambio de carretera</span>
         <h3>Scania Ibérica</h3>
         <div class="role">People &amp; Culture HRBP</div>
-        <p class="narrator">El autobús entra de lleno en el sector del transporte pesado. Camiones, autobuses y una cultura industrial que se nota en cada KPI. Aquí Marta empieza a hablar el idioma del sector.</p>
-        <ul>
-          <li>Selección y desarrollo de talento para España y Portugal</li>
-          <li>Employer branding, atracción y retención de talento</li>
-          <li>Liderazgo de la adopción de SAP SuccessFactors: formación y change management</li>
-          <li>Integridad de datos y optimización de procesos en sistemas HR</li>
-        </ul>
+        <p class="narrator">Entro de lleno en el transporte pesado. Camiones y autobuses como producto, una cultura industrial muy específica donde cercanía y dato pesan a partes iguales.</p>
+        <div class="block">
+          <span class="block-label">Contexto</span>
+          <p>Filial ibérica de fabricante sueco de camiones y autobuses. España y Portugal, perfiles muy operativos y técnicos.</p>
+        </div>
+        <div class="block">
+          <span class="block-label">Interlocutores</span>
+          <p>Talleres, posventa, comercial, dirección de país y equipos corporativos europeos.</p>
+        </div>
+        <div class="block">
+          <span class="block-label">Decisiones &amp; aprendizajes</span>
+          <p>Liderar la adopción de SAP SuccessFactors apoyando a perfiles muy distintos al perfil de oficina. El change management se hace en planta, no en una sala.</p>
+        </div>
+        <div class="block">
+          <span class="block-label">Contribución</span>
+          <p>Selección y desarrollo de talento técnico difícil, employer branding y procesos HR optimizados con datos limpios.</p>
+        </div>
         <div class="tags">
           <span class="tag">Heavy-duty industry</span>
           <span class="tag">Employer branding</span>
@@ -962,16 +1008,23 @@
         <span class="year">Mar 2025 — Mar 2026</span>
         <h3>Rovensa</h3>
         <div class="role">HR Manager EMEA · Industrial Operations</div>
-        <p class="narrator">Trayecto largo, multinacional, con plantas industriales en cuatro países. La pasajera ya conduce un equipo y un mapa EMEA completo: España, Portugal, Irlanda y Sudáfrica.</p>
-        <ul>
-          <li>HRBP para plantas en España, Portugal, Irlanda y Sudáfrica</li>
-          <li>Soporte a Plant Managers y a Procurement, Logística y Controlling</li>
-          <li>Performance, sucesión, workforce planning y presupuesto de personal</li>
-          <li>Selección de roles industriales y corporativos clave</li>
-          <li>Relaciones laborales, entornos sindicales y procesos colectivos</li>
-          <li>Proyectos transversales: Plan de Igualdad, políticas HR, encuesta de clima y planes de acción</li>
-          <li>Cultura de seguridad y HR analytics para anticipar tendencias</li>
-        </ul>
+        <p class="narrator">Plenitud del rol HRBP: cuatro países, cuatro contextos legales y un mapa EMEA completo. Aquí ya no traduzco organigrama, traduzco negocio.</p>
+        <div class="block">
+          <span class="block-label">Contexto</span>
+          <p>Bioagrícola con plantas en España, Portugal, Irlanda y Sudáfrica. Operaciones industriales + funciones corporativas.</p>
+        </div>
+        <div class="block">
+          <span class="block-label">Interlocutores</span>
+          <p>Plant Managers, Procurement, Logística, Controlling, sindicatos, dirección corporativa y equipos HR locales en cuatro países.</p>
+        </div>
+        <div class="block">
+          <span class="block-label">Decisiones &amp; aprendizajes</span>
+          <p>Priorizar entre proyectos transversales (Plan de Igualdad, encuesta de clima, políticas HR) sin perder el día a día. Aprendizaje: en EMEA, la función no es replicar — es traducir.</p>
+        </div>
+        <div class="block">
+          <span class="block-label">Contribución</span>
+          <p>Performance, sucesión, workforce planning, presupuesto de personal, relaciones laborales sin sobresaltos, cultura de seguridad y HR analytics para anticipar tendencias.</p>
+        </div>
         <div class="tags">
           <span class="tag">EMEA</span>
           <span class="tag">Industrial</span>
@@ -988,15 +1041,19 @@
         <span class="year">★ Destino</span>
         <h3>Daimler Truck España</h3>
         <div class="role">HR Business Partner · San Fernando de Henares</div>
-        <p class="narrator">Final de trayecto. La oferta pide HRBP con experiencia industrial multinacional, legislación laboral española, inglés alto, relaciones laborales y visión estratégica. Justo lo que viene en la maleta.</p>
-        <ul>
-          <li>14+ años de HR generalista y HRBP (la oferta pide 5+)</li>
-          <li>Industria multinacional con plantas y sindicatos como hábitat natural</li>
-          <li>Legislación laboral española: diplomatura + máster en Asesoría Laboral</li>
-          <li>Inglés Full Professional Proficiency (la oferta pide B2–C1)</li>
-          <li>Sector camión ya conocido: viene de Scania Ibérica</li>
-          <li>Office 365, Excel, PowerPoint en el día a día</li>
-        </ul>
+        <p class="narrator">Final de trayecto. La oferta pide HRBP con experiencia industrial multinacional, legislación laboral española, inglés alto, relaciones laborales y visión estratégica. Justo lo que traigo en la maleta.</p>
+        <div class="block">
+          <span class="block-label">Lo que traigo</span>
+          <p>14+ años de HR (la oferta pide 5+), industria multinacional como hábitat natural, legislación laboral española de base académica y de calle, inglés profesional y SAP SuccessFactors en las manos.</p>
+        </div>
+        <div class="block">
+          <span class="block-label">Por qué este puesto</span>
+          <p>Ya hablo el idioma del sector camión y autobús (Scania), conozco la cultura industrial pesada y vivo a una parada de San Fernando de Henares.</p>
+        </div>
+        <div class="block">
+          <span class="block-label">Cómo aporto desde el día 1</span>
+          <p>Compañera de Plant Managers y direcciones, soporte ágil en relaciones laborales, gestión limpia de procesos colectivos y HR analytics como brújula del negocio.</p>
+        </div>
         <div class="tags">
           <span class="tag">Ready to board</span>
         </div>
