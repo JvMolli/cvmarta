@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marta Bejarano · Próxima parada: Mercedes-Benz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --mb-black:#0a0a0a;
+    --mb-dark:#141414;
+    --mb-graphite:#1f2329;
+    --mb-silver:#c8ccd1;
+    --mb-silver-2:#e8eaed;
+    --mb-blue:#00adef;
+    --mb-blue-deep:#0078a8;
+    --mb-accent:#ffffff;
+    --road:#2a2d33;
+    --road-line:#f5d24a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  /* ================ WELCOME SPLASH ================ */
+  .welcome{
+    position:fixed;inset:0;z-index:2000;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:radial-gradient(ellipse at center,#0a1218 0%,#000 70%);
+    color:#fff;text-align:center;padding:2rem;
+    animation:welcomeOut .8s ease 3s forwards;
+  }
+  .welcome.hidden{display:none}
+  @keyframes welcomeOut{
+    to{opacity:0;visibility:hidden;transform:scale(1.05)}
+  }
+  body.welcome-active{overflow:hidden}
+  .welcome-star{
+    width:120px;height:120px;
+    animation:welcomeStar 1.6s cubic-bezier(.22,.61,.36,1);
+    filter:drop-shadow(0 0 30px rgba(0,173,239,.6));
+  }
+  @keyframes welcomeStar{
+    0%{transform:scale(0) rotate(-180deg);opacity:0}
+    60%{transform:scale(1.15) rotate(20deg);opacity:1}
+    100%{transform:scale(1) rotate(0);opacity:1}
+  }
+  .welcome-text{
+    margin-top:1.5rem;
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(2rem,6vw,3.5rem);
+    letter-spacing:.08em;
+    background:linear-gradient(180deg,#fff,#00adef);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    opacity:0;
+    animation:welcomeText .8s ease .5s forwards;
+  }
+  .welcome-sub{
+    margin-top:.4rem;
+    font-size:.85rem;letter-spacing:.4em;text-transform:uppercase;
+    color:#c8ccd1;opacity:0;
+    animation:welcomeText .8s ease .9s forwards;
+  }
+  @keyframes welcomeText{
+    from{opacity:0;transform:translateY(15px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:var(--mb-black);
+    color:var(--mb-silver-2);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:'Bebas Neue','Inter',sans-serif;letter-spacing:.04em}
+
+  /* ================ HERO ================ */
+  .hero{
+    min-height:100vh;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:2rem 1.5rem 6rem;
+    background:
+      radial-gradient(ellipse at 50% 120%, rgba(0,173,239,.18), transparent 60%),
+      linear-gradient(180deg,#0a0a0a 0%,#15191f 60%,#0a0a0a 100%);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;inset:0;
+    background-image:
+      radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.4), transparent),
+      radial-gradient(1px 1px at 80% 60%, rgba(255,255,255,.3), transparent),
+      radial-gradient(1.5px 1.5px at 60% 20%, rgba(255,255,255,.25), transparent),
+      radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,.3), transparent);
+    background-size:600px 600px;
+    opacity:.5;
+    animation:drift 60s linear infinite;
+  }
+  @keyframes drift{from{background-position:0 0}to{background-position:600px 600px}}
+
+  .hero .badge{
+    display:inline-flex;align-items:center;gap:.6rem;
+    padding:.45rem 1rem;border-radius:999px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);
+    font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--mb-silver);
+    backdrop-filter:blur(8px);
+    z-index:2;
+  }
+  .hero h1{
+    font-size:clamp(2.8rem,8vw,6.5rem);
+    font-weight:700;
+    margin:1.2rem 0 .5rem;
+    color:#fff;
+    z-index:2;
+  }
+  .hero .sub{
+    font-size:clamp(1rem,2vw,1.3rem);
+    color:var(--mb-silver);
+    max-width:680px;
+    margin:0 auto 2.5rem;
+    z-index:2;
+  }
+  .hero .star{
+    width:90px;height:90px;
+    margin:1.5rem auto 0;
+    z-index:2;
+    filter:drop-shadow(0 0 20px rgba(0,173,239,.4));
+    animation:spinStar 18s linear infinite;
+  }
+  @keyframes spinStar{to{transform:rotate(360deg)}}
+
+  .scroll-cue{
+    position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+    color:var(--mb-silver);font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;
+    opacity:.7;
+  }
+  .scroll-cue::after{
+    content:"";display:block;width:1px;height:40px;background:var(--mb-silver);
+    margin:.6rem auto 0;animation:cue 1.8s ease-in-out infinite;
+    transform-origin:top;
+  }
+  @keyframes cue{0%,100%{transform:scaleY(0);opacity:0}50%{transform:scaleY(1);opacity:1}}
+
+  /* Animated bus across hero */
+  .hero-road{
+    position:absolute;bottom:0;left:0;right:0;height:120px;
+    background:
+      linear-gradient(180deg,transparent 0%,#0a0a0a 80%),
+      repeating-linear-gradient(90deg,var(--road-line) 0 30px,transparent 30px 70px) bottom 30px left 0/100% 4px no-repeat,
+      linear-gradient(180deg,#1a1d22 0%,#0a0a0a 100%);
+    overflow:hidden;
+  }
+  .hero-bus{
+    position:absolute;bottom:32px;left:-200px;
+    width:180px;
+    animation:driveAcross 12s linear infinite;
+  }
+  @keyframes driveAcross{
+    from{left:-200px}
+    to{left:calc(100% + 50px)}
+  }
+
+  /* ================ TICKET ================ */
+  .ticket-section{
+    padding:5rem 1.5rem 3rem;
+    background:linear-gradient(180deg,#0a0a0a,#101317);
+  }
+  .ticket{
+    max-width:920px;margin:0 auto;
+    background:linear-gradient(135deg,#1a1d22 0%,#22272d 100%);
+    border-radius:18px;
+    box-shadow:0 30px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06);
+    overflow:hidden;
+    position:relative;
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .ticket::before,.ticket::after{
+    content:"";position:absolute;width:30px;height:30px;border-radius:50%;
+    background:#0a0a0a;top:50%;transform:translateY(-50%);
+  }
+  .ticket::before{left:-15px}
+  .ticket::after{right:-15px}
+  .ticket-grid{
+    display:grid;grid-template-columns:1.2fr 1fr;gap:0;
+  }
+  .ticket-main{padding:2.2rem 2.5rem;border-right:2px dashed rgba(255,255,255,.1)}
+  .ticket-side{padding:2.2rem;display:flex;flex-direction:column;justify-content:center;background:rgba(0,0,0,.15)}
+  .ticket-label{font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--mb-blue);margin-bottom:.3rem}
+  .ticket h2{font-size:2.4rem;color:#fff;line-height:1;margin-bottom:.4rem}
+  .ticket .role{color:var(--mb-silver);font-size:1rem;margin-bottom:1.4rem}
+  .ticket .meta{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;font-size:.85rem}
+  .ticket .meta div span{display:block;color:var(--mb-blue);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.15rem}
+  .ticket .meta div strong{color:#fff;font-weight:500;font-size:.92rem}
+  .ticket-route{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:#fff;margin-top:.4rem;line-height:1.1}
+  .ticket-route .arrow{color:var(--mb-blue);margin:0 .4rem}
+  .ticket-stamp{
+    margin-top:1rem;
+    display:inline-block;padding:.4rem .9rem;
+    border:2px solid var(--mb-blue);color:var(--mb-blue);
+    font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;
+    transform:rotate(-3deg);
+    border-radius:4px;
+  }
+  @media(max-width:680px){
+    .ticket-grid{grid-template-columns:1fr}
+    .ticket-main{border-right:none;border-bottom:2px dashed rgba(255,255,255,.1)}
+  }
+
+  /* ================ JOURNEY ================ */
+  .journey{
+    position:relative;
+    padding:6rem 1.5rem 4rem;
+    background:linear-gradient(180deg,#101317 0%,#0a0a0a 100%);
+  }
+  .journey-header{text-align:center;margin-bottom:5rem}
+  .journey-header h2{font-size:clamp(2rem,5vw,3.5rem);color:#fff}
+  .journey-header p{color:var(--mb-silver);max-width:620px;margin:.6rem auto 0}
+
+  .timeline{
+    max-width:980px;margin:0 auto;position:relative;
+    padding:1rem 0 2rem;
+  }
+  /* The road */
+  .timeline::before{
+    content:"";position:absolute;left:50%;top:0;bottom:0;
+    width:60px;transform:translateX(-50%);
+    background:
+      repeating-linear-gradient(180deg,var(--road-line) 0 22px,transparent 22px 44px) center/6px 100% no-repeat,
+      linear-gradient(180deg,#1a1d22,#22272d);
+    border-left:2px solid rgba(255,255,255,.06);
+    border-right:2px solid rgba(255,255,255,.06);
+    border-radius:6px;
+  }
+
+  /* The travelling bus marker */
+  .bus-marker{
+    position:absolute;left:50%;transform:translate(-50%,-50%);
+    top:0;
+    width:88px;height:auto;
+    transition:top .6s cubic-bezier(.22,.61,.36,1);
+    z-index:5;
+    filter:drop-shadow(0 8px 18px rgba(0,173,239,.35));
+  }
+
+  .stop{
+    position:relative;
+    margin-bottom:3.2rem;
+    display:grid;
+    grid-template-columns:1fr 60px 1fr;
+    gap:1rem;
+    align-items:center;
+    opacity:0;transform:translateY(40px);
+    transition:opacity .8s ease,transform .8s ease;
+  }
+  .stop.visible{opacity:1;transform:translateY(0)}
+  .stop .pin{
+    grid-column:2;
+    width:36px;height:36px;border-radius:50%;
+    background:radial-gradient(circle at 30% 30%,#fff,#c8ccd1 60%,#7a8086);
+    border:3px solid #0a0a0a;
+    box-shadow:0 0 0 2px var(--mb-blue),0 6px 14px rgba(0,0,0,.6);
+    margin:0 auto;
+    position:relative;
+    z-index:2;
+  }
+  .stop.destination .pin{
+    background:radial-gradient(circle at 30% 30%,#fff,var(--mb-blue) 60%,var(--mb-blue-deep));
+    box-shadow:0 0 0 2px #fff,0 0 30px rgba(0,173,239,.7);
+    width:48px;height:48px;
+  }
+  .stop .card{
+    background:linear-gradient(135deg,rgba(31,35,41,.95),rgba(20,23,27,.95));
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:14px;padding:1.5rem 1.6rem;
+    box-shadow:0 12px 30px rgba(0,0,0,.5);
+    backdrop-filter:blur(6px);
+    position:relative;
+  }
+  .stop:nth-child(odd) .card{grid-column:1}
+  .stop:nth-child(even) .card{grid-column:3}
+  .stop .card::after{
+    content:"";position:absolute;top:50%;width:30px;height:2px;
+    background:linear-gradient(90deg,transparent,var(--mb-blue));
+    transform:translateY(-50%);
+  }
+  .stop:nth-child(odd) .card::after{right:-30px;background:linear-gradient(90deg,var(--mb-blue),transparent)}
+  .stop:nth-child(even) .card::after{left:-30px}
+
+  .stop .year{
+    display:inline-block;font-family:'Bebas Neue',sans-serif;
+    font-size:.95rem;letter-spacing:.18em;
+    color:var(--mb-blue);margin-bottom:.4rem;
+  }
+  .stop h3{font-size:1.5rem;color:#fff;margin-bottom:.15rem;line-height:1.15}
+  .stop .role{color:var(--mb-silver);font-size:.92rem;margin-bottom:.9rem;font-weight:500}
+  .stop ul{list-style:none;padding:0}
+  .stop ul li{
+    position:relative;padding-left:1.2rem;font-size:.9rem;
+    color:#cfd3d8;margin-bottom:.4rem;
+  }
+  .stop ul li::before{
+    content:"";position:absolute;left:0;top:.55rem;
+    width:8px;height:8px;border-radius:50%;
+    background:var(--mb-blue);box-shadow:0 0 6px rgba(0,173,239,.6);
+  }
+  .stop .narrator{
+    font-style:italic;color:var(--mb-silver);font-size:.85rem;
+    margin-bottom:.8rem;padding-left:.8rem;
+    border-left:2px solid var(--mb-blue);
+  }
+  .stop .tags{margin-top:.8rem;display:flex;flex-wrap:wrap;gap:.4rem}
+  .stop .tag{
+    font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;
+    padding:.25rem .6rem;border-radius:999px;
+    background:rgba(0,173,239,.1);color:var(--mb-blue);
+    border:1px solid rgba(0,173,239,.25);
+  }
+  .stop.destination .card{
+    background:linear-gradient(135deg,rgba(0,173,239,.18),rgba(0,120,168,.08));
+    border:1px solid rgba(0,173,239,.4);
+    box-shadow:0 0 60px rgba(0,173,239,.25);
+  }
+  .stop.destination h3{font-size:2rem}
+  .stop.destination .role{color:#fff}
+
+  @media(max-width:780px){
+    .timeline::before{left:30px}
+    .stop{grid-template-columns:60px 1fr;gap:.6rem}
+    .stop .pin{grid-column:1}
+    .stop:nth-child(odd) .card,
+    .stop:nth-child(even) .card{grid-column:2}
+    .stop .card::after{display:none}
+    .bus-marker{left:30px}
+  }
+
+  /* ================ LUGGAGE / SKILLS ================ */
+  .luggage{
+    padding:5rem 1.5rem;
+    background:linear-gradient(180deg,#0a0a0a,#15191f);
+  }
+  .luggage-inner{max-width:1080px;margin:0 auto}
+  .luggage h2{font-size:clamp(2rem,5vw,3rem);color:#fff;text-align:center;margin-bottom:.6rem}
+  .luggage .lead{color:var(--mb-silver);text-align:center;max-width:580px;margin:0 auto 3rem}
+  .skills-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:1rem;margin-bottom:3rem;
+  }
+  .skill{
+    background:linear-gradient(135deg,rgba(31,35,41,.8),rgba(20,23,27,.8));
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:12px;padding:1.2rem 1.3rem;
+    transition:transform .3s ease,border-color .3s ease;
+  }
+  .skill:hover{transform:translateY(-4px);border-color:var(--mb-blue)}
+  .skill .icon{
+    width:42px;height:42px;border-radius:10px;
+    background:rgba(0,173,239,.15);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:.7rem;color:var(--mb-blue);
+  }
+  .skill h4{color:#fff;font-size:1rem;margin-bottom:.2rem;font-weight:600}
+  .skill p{color:var(--mb-silver);font-size:.85rem}
+
+  .toolbox{
+    display:grid;grid-template-columns:1fr 1fr;gap:1rem;
+    background:rgba(31,35,41,.5);border:1px solid rgba(255,255,255,.08);
+    border-radius:14px;padding:1.6rem;
+  }
+  .toolbox h4{color:var(--mb-blue);font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;margin-bottom:.6rem}
+  .toolbox p{color:#fff;font-size:.95rem}
+  @media(max-width:600px){.toolbox{grid-template-columns:1fr}}
+
+  /* ================ CTA ================ */
+  .cta{
+    padding:6rem 1.5rem;
+    text-align:center;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(0,173,239,.2), transparent 70%),
+      #0a0a0a;
+    position:relative;overflow:hidden;
+  }
+  .cta h2{font-size:clamp(2.2rem,6vw,4rem);color:#fff;margin-bottom:.8rem}
+  .cta p{color:var(--mb-silver);max-width:580px;margin:0 auto 2.5rem;font-size:1.05rem}
+  .cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:.5rem;
+    padding:.9rem 1.6rem;border-radius:999px;
+    font-weight:600;font-size:.92rem;text-decoration:none;
+    transition:all .25s ease;
+    border:1px solid transparent;
+  }
+  .btn-primary{background:var(--mb-blue);color:#0a0a0a}
+  .btn-primary:hover{background:#fff;transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.25)}
+  .btn-ghost:hover{border-color:var(--mb-blue);color:var(--mb-blue)}
+
+  footer{
+    padding:2rem 1.5rem;text-align:center;
+    color:#5a6068;font-size:.78rem;
+    background:#050607;
+    border-top:1px solid rgba(255,255,255,.04);
+  }
+  footer .star-mini{display:inline-block;width:14px;height:14px;vertical-align:middle;margin:0 .3rem;opacity:.6}
+
+  /* ================ ARRIVAL CTA BUTTON ================ */
+  .arrival-cta{
+    text-align:center;margin:1rem auto 0;
+    opacity:0;transform:translateY(20px);
+    transition:opacity .8s ease,transform .8s ease;
+    pointer-events:none;
+  }
+  .arrival-cta.show{opacity:1;transform:translateY(0);pointer-events:auto}
+  .arrival-cta-hint{
+    font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--mb-silver);margin-bottom:1.2rem;
+  }
+  .btn-arrival{
+    position:relative;
+    display:inline-flex;flex-direction:column;align-items:center;gap:.15rem;
+    padding:1.1rem 2.4rem;
+    background:linear-gradient(135deg,#00adef 0%,#0078a8 100%);
+    color:#fff;border:none;border-radius:999px;
+    cursor:pointer;
+    font-family:inherit;
+    box-shadow:
+      0 0 0 3px rgba(0,173,239,.15),
+      0 20px 50px rgba(0,173,239,.4),
+      0 0 80px rgba(0,173,239,.3);
+    transition:transform .25s ease,box-shadow .25s ease;
+    overflow:hidden;
+    animation:pulseBtn 2.4s ease-in-out infinite;
+  }
+  @keyframes pulseBtn{
+    0%,100%{box-shadow:0 0 0 3px rgba(0,173,239,.15),0 20px 50px rgba(0,173,239,.4),0 0 80px rgba(0,173,239,.3)}
+    50%{box-shadow:0 0 0 8px rgba(0,173,239,.05),0 25px 60px rgba(0,173,239,.55),0 0 120px rgba(0,173,239,.45)}
+  }
+  .btn-arrival:hover{transform:translateY(-3px) scale(1.02)}
+  .btn-arrival:active{transform:translateY(-1px) scale(.99)}
+  .btn-arrival-glow{
+    position:absolute;inset:0;
+    background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);
+    transform:translateX(-100%);
+    animation:sheen 3.2s ease-in-out infinite;
+  }
+  @keyframes sheen{
+    0%,40%{transform:translateX(-100%)}
+    60%,100%{transform:translateX(100%)}
+  }
+  .btn-arrival-label{
+    font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.08em;
+    position:relative;z-index:1;
+  }
+  .btn-arrival-sub{
+    font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;
+    opacity:.85;position:relative;z-index:1;
+  }
+
+  /* ================ ARRIVAL · MODAL ================ */
+  .arrival-modal{
+    position:fixed;inset:0;z-index:1000;
+    display:flex;align-items:center;justify-content:center;
+    padding:2rem 1rem;
+    overflow-y:auto;
+  }
+  .arrival-modal[hidden]{display:none}
+  .arrival-backdrop{
+    position:fixed;inset:0;
+    background:rgba(0,0,0,.85);
+    backdrop-filter:blur(10px);
+    animation:fadeIn .4s ease;
+  }
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  body.modal-open{overflow:hidden}
+
+  .arrival{
+    position:relative;
+    padding:6rem 1.5rem 4rem;
+    text-align:center;
+    overflow:hidden;
+    background:#000;
+    isolation:isolate;
+    border-radius:24px;
+    max-width:880px;width:100%;
+    border:1px solid rgba(0,173,239,.25);
+    box-shadow:0 40px 120px rgba(0,0,0,.8),0 0 80px rgba(0,173,239,.25);
+    animation:modalIn .6s cubic-bezier(.22,.61,.36,1);
+  }
+  @keyframes modalIn{
+    from{opacity:0;transform:translateY(40px) scale(.96)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+  }
+  .arrival-close{
+    position:absolute;top:1rem;right:1rem;z-index:10;
+    width:42px;height:42px;border-radius:50%;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.15);
+    color:#fff;font-size:1.6rem;line-height:1;
+    cursor:pointer;
+    transition:background .2s ease,transform .2s ease;
+  }
+  .arrival-close:hover{background:rgba(0,173,239,.25);transform:rotate(90deg)}
+  .arrival-sky{
+    position:absolute;inset:0;z-index:-2;
+    background:
+      radial-gradient(ellipse at 50% 100%, rgba(0,173,239,.35), transparent 55%),
+      radial-gradient(ellipse at 50% 30%, rgba(0,120,168,.25), transparent 60%),
+      linear-gradient(180deg,#000 0%,#0a1218 50%,#000 100%);
+  }
+  .arrival-rays{
+    position:absolute;inset:-50%;z-index:-1;
+    background:
+      conic-gradient(from 0deg at 50% 50%,
+        transparent 0deg, rgba(0,173,239,.08) 8deg, transparent 16deg,
+        transparent 40deg, rgba(255,255,255,.05) 48deg, transparent 56deg,
+        transparent 90deg, rgba(0,173,239,.08) 98deg, transparent 106deg,
+        transparent 140deg, rgba(255,255,255,.05) 148deg, transparent 156deg,
+        transparent 180deg, rgba(0,173,239,.08) 188deg, transparent 196deg,
+        transparent 230deg, rgba(255,255,255,.05) 238deg, transparent 246deg,
+        transparent 270deg, rgba(0,173,239,.08) 278deg, transparent 286deg,
+        transparent 320deg, rgba(255,255,255,.05) 328deg, transparent 336deg,
+        transparent 360deg);
+    animation:spinRays 90s linear infinite;
+    opacity:.7;
+  }
+  @keyframes spinRays{to{transform:rotate(360deg)}}
+
+  .arrival-inner{max-width:780px;margin:0 auto;position:relative}
+
+  .arrival-kicker{
+    display:inline-block;
+    font-size:.78rem;letter-spacing:.4em;text-transform:uppercase;
+    color:var(--mb-blue);
+    padding:.4rem 1rem;border:1px solid rgba(0,173,239,.4);border-radius:999px;
+    background:rgba(0,173,239,.08);
+    margin-bottom:1.5rem;
+  }
+  .arrival-title{
+    font-size:clamp(2.6rem,8vw,5.5rem);
+    color:#fff;line-height:1;margin-bottom:1rem;
+    font-weight:700;
+  }
+  .arrival-title em{
+    font-style:normal;
+    background:linear-gradient(180deg,#fff 0%,#00adef 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    text-shadow:0 0 60px rgba(0,173,239,.4);
+  }
+
+  .big-star-wrap{
+    margin:2rem auto 2.5rem;
+    width:min(280px,70vw);
+    animation:floatStar 6s ease-in-out infinite;
+  }
+  @keyframes floatStar{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-12px)}
+  }
+  .big-star{
+    width:100%;height:auto;
+    filter:drop-shadow(0 0 40px rgba(0,173,239,.6));
+    animation:rotateStar 30s linear infinite;
+  }
+  @keyframes rotateStar{to{transform:rotate(360deg)}}
+
+  .counters{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;
+    max-width:640px;margin:0 auto 3rem;
+  }
+  .counter{
+    padding:1.2rem .6rem;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:12px;
+    backdrop-filter:blur(8px);
+  }
+  .counter .num{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(2.2rem,6vw,3.4rem);
+    color:#fff;line-height:1;
+    background:linear-gradient(180deg,#fff,#00adef);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .counter .suffix{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(1.4rem,4vw,2rem);color:var(--mb-blue);
+    margin-left:2px;
+  }
+  .counter label{
+    display:block;
+    font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--mb-silver);margin-top:.3rem;
+  }
+  @media(max-width:600px){
+    .counters{grid-template-columns:repeat(2,1fr)}
+  }
+
+  .letter{
+    max-width:640px;margin:0 auto 2.5rem;
+    text-align:left;
+    padding:2.2rem 2rem;
+    background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(0,173,239,.04));
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:16px;
+    box-shadow:0 30px 80px rgba(0,0,0,.6);
+    position:relative;
+  }
+  .letter::before{
+    content:"";position:absolute;top:-1px;left:20%;right:20%;height:1px;
+    background:linear-gradient(90deg,transparent,var(--mb-blue),transparent);
+  }
+  .letter p{margin-bottom:1rem;color:#dfe3e8;font-size:1rem;line-height:1.75}
+  .letter strong{color:#fff;font-weight:600}
+  .letter-open{color:var(--mb-blue)!important;font-weight:500}
+  .letter-close{
+    font-style:italic;color:#fff!important;
+    border-left:3px solid var(--mb-blue);
+    padding-left:1rem;margin-top:1.5rem!important;
+  }
+  .signature{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:1.6rem;color:#fff!important;letter-spacing:.06em;
+    margin-bottom:0!important;
+  }
+
+  .arrival .cta-buttons{margin-bottom:2.5rem}
+  .final-line{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:1.1rem;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--mb-silver);
+  }
+  .final-line span{color:var(--mb-blue)}
+
+  @media print{
+    body{background:#fff;color:#000}
+    .hero,.hero-road,.cta,.scroll-cue,.bus-marker,.arrival-rays,.arrival-sky{display:none!important}
+    .stop{opacity:1!important;transform:none!important}
+    *{color:#000!important;background:#fff!important;box-shadow:none!important;border-color:#ccc!important}
+  }
+</style>
+</head>
+<body class="welcome-active">
+
+<!-- ============= WELCOME SPLASH ============= -->
+<div class="welcome" id="welcome" aria-hidden="true">
+  <svg class="welcome-star" viewBox="0 0 100 100">
+    <defs>
+      <linearGradient id="welcomeSilver" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="50%" stop-color="#c8ccd1"/>
+        <stop offset="100%" stop-color="#7a8086"/>
+      </linearGradient>
+    </defs>
+    <circle cx="50" cy="50" r="46" fill="none" stroke="url(#welcomeSilver)" stroke-width="3"/>
+    <g fill="url(#welcomeSilver)" transform="translate(50 50)">
+      <polygon points="0,-38 4,-2 -4,-2"/>
+      <polygon points="0,-38 4,-2 -4,-2" transform="rotate(120)"/>
+      <polygon points="0,-38 4,-2 -4,-2" transform="rotate(240)"/>
+    </g>
+  </svg>
+  <div class="welcome-text">Bienvenidos a bordo</div>
+  <div class="welcome-sub">El viaje está a punto de empezar</div>
+</div>
+
+<!-- ============= HERO ============= -->
+<section class="hero">
+  <span class="badge">🚌 14 años de viaje por el HR</span>
+  <h1>El viaje de Marta<br>por Recursos Humanos</h1>
+  <p class="sub">Una ruta de 14 años entre personas, plantas industriales y proyectos internacionales. Acomódate, abróchate el cinturón y disfruta del recorrido.</p>
+
+  <!-- Mercedes-style three-pointed star -->
+  <svg class="star" viewBox="0 0 100 100" aria-hidden="true">
+    <defs>
+      <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="50%" stop-color="#c8ccd1"/>
+        <stop offset="100%" stop-color="#7a8086"/>
+      </linearGradient>
+    </defs>
+    <circle cx="50" cy="50" r="46" fill="none" stroke="url(#silver)" stroke-width="3"/>
+    <g fill="url(#silver)" transform="translate(50 50)">
+      <polygon points="0,-38 4,-2 -4,-2"/>
+      <polygon points="0,-38 4,-2 -4,-2" transform="rotate(120)"/>
+      <polygon points="0,-38 4,-2 -4,-2" transform="rotate(240)"/>
+    </g>
+  </svg>
+
+  <div class="scroll-cue">Sube al autobús</div>
+
+  <div class="hero-road" aria-hidden="true">
+    <svg class="hero-bus" viewBox="0 0 200 90">
+      <!-- bus body -->
+      <rect x="10" y="20" width="170" height="50" rx="8" fill="#e8eaed"/>
+      <rect x="10" y="20" width="170" height="14" rx="8" fill="#00adef"/>
+      <!-- windows -->
+      <g fill="#1a1d22">
+        <rect x="22" y="38" width="22" height="16" rx="2"/>
+        <rect x="50" y="38" width="22" height="16" rx="2"/>
+        <rect x="78" y="38" width="22" height="16" rx="2"/>
+        <rect x="106" y="38" width="22" height="16" rx="2"/>
+        <rect x="134" y="38" width="22" height="16" rx="2"/>
+      </g>
+      <!-- door -->
+      <rect x="160" y="38" width="14" height="28" fill="#1a1d22" rx="1"/>
+      <!-- headlight -->
+      <circle cx="178" cy="58" r="3" fill="#fff7c2"/>
+      <!-- wheels -->
+      <circle cx="42" cy="72" r="10" fill="#0a0a0a"/>
+      <circle cx="42" cy="72" r="4" fill="#7a8086"/>
+      <circle cx="150" cy="72" r="10" fill="#0a0a0a"/>
+      <circle cx="150" cy="72" r="4" fill="#7a8086"/>
+      <!-- text -->
+      <text x="95" y="30" font-family="Bebas Neue, sans-serif" font-size="10" fill="#fff" text-anchor="middle" letter-spacing="1">DESTINO: MERCEDES</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ============= TICKET ============= -->
+<section class="ticket-section">
+  <div class="ticket">
+    <div class="ticket-grid">
+      <div class="ticket-main">
+        <div class="ticket-label">Billete de embarque</div>
+        <h2>Marta Bejarano Carriazo</h2>
+        <div class="role">HR Business Partner · HR Manager · People &amp; Culture</div>
+        <div class="ticket-route">
+          Getafe (MAD) <span class="arrow">→</span> Mercedes-Benz
+        </div>
+        <div class="ticket-stamp">Sector transporte · 14+ años HR</div>
+      </div>
+      <div class="ticket-side">
+        <div class="meta">
+          <div><span>Pasajera</span><strong>Marta Bejarano</strong></div>
+          <div><span>Asiento</span><strong>HRBP · Industrial</strong></div>
+          <div><span>Salida</span><strong>Getafe, Madrid</strong></div>
+          <div><span>Idiomas</span><strong>ES · EN</strong></div>
+          <div><span>Teléfono</span><strong>+34 626 171 719</strong></div>
+          <div><span>Email</span><strong style="font-size:.78rem">m.bejarano87@hotmail.es</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= JOURNEY / TIMELINE ============= -->
+<section class="journey">
+  <div class="journey-header">
+    <h2>La ruta hasta aquí</h2>
+    <p>Cada parada ha sumado kilómetros, idiomas, plantas industriales y equipos. Estas son las que más han marcado el viaje.</p>
+  </div>
+
+  <div class="timeline" id="timeline">
+
+    <!-- Bus marker that moves down the road -->
+    <svg class="bus-marker" id="busMarker" viewBox="0 0 100 80" aria-hidden="true">
+      <rect x="10" y="10" width="80" height="55" rx="6" fill="#e8eaed"/>
+      <rect x="10" y="10" width="80" height="14" rx="6" fill="#00adef"/>
+      <g fill="#1a1d22">
+        <rect x="18" y="28" width="14" height="12" rx="2"/>
+        <rect x="36" y="28" width="14" height="12" rx="2"/>
+        <rect x="54" y="28" width="14" height="12" rx="2"/>
+        <rect x="72" y="28" width="14" height="12" rx="2"/>
+      </g>
+      <circle cx="28" cy="68" r="7" fill="#0a0a0a"/>
+      <circle cx="28" cy="68" r="3" fill="#7a8086"/>
+      <circle cx="72" cy="68" r="7" fill="#0a0a0a"/>
+      <circle cx="72" cy="68" r="3" fill="#7a8086"/>
+    </svg>
+
+    <!-- STOP 1 -->
+    <div class="stop">
+      <div class="pin"></div>
+      <div class="card">
+        <span class="year">2007 — 2014 · Salida</span>
+        <h3>Universidad &amp; primeros kilómetros</h3>
+        <div class="role">Formación + prácticas en multinacionales</div>
+        <p class="narrator">El motor arranca en la Universidad Rey Juan Carlos. Diploma en Relaciones Laborales y, después, el Máster en Asesoría Laboral en EFEM.</p>
+        <ul>
+          <li>Diplomatura en Relaciones Laborales (URJC, 2007–2010)</li>
+          <li>Máster en Asesoría Laboral (EFEM, 2013–2014)</li>
+          <li>Primeras paradas formativas: Schneider Electric, Accenture, Sacyr Vallehermoso, Bricomart, Asic Group y Unique ETT</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Relaciones laborales</span>
+          <span class="tag">Nóminas</span>
+          <span class="tag">Selección</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STOP 2 -->
+    <div class="stop">
+      <div class="pin"></div>
+      <div class="card">
+        <span class="year">Oct 2016 — Jun 2018</span>
+        <h3>Unilabs</h3>
+        <div class="role">HR Generalist</div>
+        <p class="narrator">Primera ruta como generalista: la pasajera ya no observa, conduce. Asesora a managers, gestiona reestructuraciones y empieza a leer el cuadro de mandos del HR.</p>
+        <ul>
+          <li>Asesoramiento HR a managers y empleados</li>
+          <li>Selección, reestructuraciones, relaciones laborales y planes de formación</li>
+          <li>Análisis de KPIs, absentismo y costes de personal</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">HR Advisory</span>
+          <span class="tag">Cambio organizativo</span>
+          <span class="tag">KPIs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STOP 3 -->
+    <div class="stop">
+      <div class="pin"></div>
+      <div class="card">
+        <span class="year">Oct 2018 — Jun 2023</span>
+        <h3>Ardagh Group</h3>
+        <div class="role">Global HR Project Lead &amp; HR Officer</div>
+        <p class="narrator">El autobús cruza fronteras. De HR Officer a Global Project Lead: lidera el rollout mundial de SAP SuccessFactors + OpenText coordinando equipos en varios países.</p>
+        <ul>
+          <li>Rollout global de OpenText integrado con SAP SuccessFactors (EC 2.0)</li>
+          <li>Diseño de estructuras documentales globales, workflows y compliance</li>
+          <li>Administración de personal y coordinación de nóminas en plantas españolas</li>
+          <li>Talento, onboarding, formación, planes de sucesión y reporting</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">SAP SuccessFactors</span>
+          <span class="tag">Proyectos globales</span>
+          <span class="tag">Change management</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STOP 4 - Scania - KEY -->
+    <div class="stop">
+      <div class="pin"></div>
+      <div class="card">
+        <span class="year">Oct 2023 — Dic 2024 · Cambio de carretera</span>
+        <h3>Scania Ibérica</h3>
+        <div class="role">People &amp; Culture HRBP</div>
+        <p class="narrator">El autobús entra de lleno en el sector del transporte pesado. Camiones, autobuses y una cultura industrial que se nota en cada KPI. Aquí Marta empieza a hablar el idioma del sector.</p>
+        <ul>
+          <li>Selección y desarrollo de talento para España y Portugal</li>
+          <li>Employer branding, atracción y retención de talento</li>
+          <li>Liderazgo de la adopción de SAP SuccessFactors: formación y change management</li>
+          <li>Integridad de datos y optimización de procesos en sistemas HR</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Heavy-duty industry</span>
+          <span class="tag">Employer branding</span>
+          <span class="tag">SAP SSFF</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STOP 5 -->
+    <div class="stop">
+      <div class="pin"></div>
+      <div class="card">
+        <span class="year">Mar 2025 — Mar 2026</span>
+        <h3>Rovensa</h3>
+        <div class="role">HR Manager EMEA · Industrial Operations</div>
+        <p class="narrator">Trayecto largo, multinacional, con plantas industriales en cuatro países. La pasajera ya conduce un equipo y un mapa EMEA completo: España, Portugal, Irlanda y Sudáfrica.</p>
+        <ul>
+          <li>HRBP para plantas en España, Portugal, Irlanda y Sudáfrica</li>
+          <li>Soporte a Plant Managers y a Procurement, Logística y Controlling</li>
+          <li>Performance, sucesión, workforce planning y presupuesto de personal</li>
+          <li>Selección de roles industriales y corporativos clave</li>
+          <li>Relaciones laborales, entornos sindicales y procesos colectivos</li>
+          <li>Proyectos transversales: Plan de Igualdad, políticas HR, encuesta de clima y planes de acción</li>
+          <li>Cultura de seguridad y HR analytics para anticipar tendencias</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">EMEA</span>
+          <span class="tag">Industrial</span>
+          <span class="tag">Labour relations</span>
+          <span class="tag">HR Analytics</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESTINATION -->
+    <div class="stop destination">
+      <div class="pin"></div>
+      <div class="card">
+        <span class="year">★ Destino</span>
+        <h3>Daimler Truck España</h3>
+        <div class="role">HR Business Partner · San Fernando de Henares</div>
+        <p class="narrator">Final de trayecto. La oferta pide HRBP con experiencia industrial multinacional, legislación laboral española, inglés alto, relaciones laborales y visión estratégica. Justo lo que viene en la maleta.</p>
+        <ul>
+          <li>14+ años de HR generalista y HRBP (la oferta pide 5+)</li>
+          <li>Industria multinacional con plantas y sindicatos como hábitat natural</li>
+          <li>Legislación laboral española: diplomatura + máster en Asesoría Laboral</li>
+          <li>Inglés Full Professional Proficiency (la oferta pide B2–C1)</li>
+          <li>Sector camión ya conocido: viene de Scania Ibérica</li>
+          <li>Office 365, Excel, PowerPoint en el día a día</li>
+        </ul>
+        <div class="tags">
+          <span class="tag">Ready to board</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="arrival-cta" id="arrivalCta">
+    <p class="arrival-cta-hint">El autobús ha llegado a la estación.</p>
+    <button class="btn-arrival" id="openArrival" type="button">
+      <span class="btn-arrival-glow"></span>
+      <span class="btn-arrival-label">Bajar del autobús</span>
+      <span class="btn-arrival-sub">Abrir mensaje de Marta</span>
+    </button>
+  </div>
+</section>
+
+<!-- ============= LUGGAGE / SKILLS ============= -->
+<section class="luggage">
+  <div class="luggage-inner">
+    <h2>El equipaje que trae</h2>
+    <p class="lead">Lo que viaja en la maleta después de 14 años de carretera HR internacional.</p>
+
+    <div class="skills-grid">
+      <div class="skill">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m22 11-3 3-2-2"/></svg>
+        </div>
+        <h4>HR Business Partnering</h4>
+        <p>Compañera de viaje de Plant Managers y direcciones corporativas.</p>
+      </div>
+      <div class="skill">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 4 5-5"/></svg>
+        </div>
+        <h4>HR Analytics &amp; Reporting</h4>
+        <p>KPIs, absentismo, costes y reporting que mueven decisiones.</p>
+      </div>
+      <div class="skill">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h4>Talent &amp; Succession</h4>
+        <p>Selección de roles industriales y corporativos, planes de sucesión y desarrollo.</p>
+      </div>
+      <div class="skill">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+        </div>
+        <h4>Relaciones laborales</h4>
+        <p>Sindicatos, procesos colectivos y entornos industriales sin sobresaltos.</p>
+      </div>
+      <div class="skill">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <h4>Operaciones HR internacionales</h4>
+        <p>EMEA real: España, Portugal, Irlanda, Sudáfrica y proyectos globales.</p>
+      </div>
+      <div class="skill">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg>
+        </div>
+        <h4>HRIS &amp; transformación</h4>
+        <p>Implantación y adopción de SAP SuccessFactors + OpenText a nivel global.</p>
+      </div>
+      <div class="skill">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7h-3V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v3H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM9 4h6v3H9V4z"/></svg>
+        </div>
+        <h4>Operaciones industriales</h4>
+        <p>HRBP de plantas con Procurement, Logística y Controlling como vecinos de pasillo.</p>
+      </div>
+      <div class="skill">
+        <div class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96 12 12.01l8.73-5.05"/><path d="M12 22.08V12"/></svg>
+        </div>
+        <h4>Cultura de seguridad</h4>
+        <p>Promueve la safety culture en plantas: clave en automoción y transporte.</p>
+      </div>
+    </div>
+
+    <div class="toolbox">
+      <div>
+        <h4>Idiomas</h4>
+        <p>Español (nativo) · Inglés (Full Professional Proficiency)</p>
+      </div>
+      <div>
+        <h4>Sistemas y herramientas</h4>
+        <p>SAP SuccessFactors · OpenText · LMS · Office 365 · Teams · Sistema RED · Contrat@ · CRM · Jira</p>
+      </div>
+      <div>
+        <h4>Formación</h4>
+        <p>Máster en Asesoría Laboral (EFEM) · Diplomatura en Relaciones Laborales (URJC)</p>
+      </div>
+      <div>
+        <h4>Movilidad</h4>
+        <p>Carnet de conducir + vehículo propio · Disponibilidad para viajar</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= ARRIVAL · APOTHEOSIS (MODAL) ============= -->
+<div class="arrival-modal" id="arrivalModal" role="dialog" aria-modal="true" aria-labelledby="arrivalTitle" hidden>
+  <div class="arrival-backdrop" data-close></div>
+  <div class="arrival" id="arrival">
+    <button class="arrival-close" type="button" data-close aria-label="Cerrar">×</button>
+    <div class="arrival-sky" aria-hidden="true"></div>
+    <div class="arrival-rays" aria-hidden="true"></div>
+
+    <div class="arrival-inner">
+    <span class="arrival-kicker">Final de trayecto</span>
+    <h2 class="arrival-title" id="arrivalTitle">Estación término<br><em>Daimler Truck España</em></h2>
+
+    <!-- Big Mercedes star with light burst -->
+    <div class="big-star-wrap">
+      <svg class="big-star" viewBox="0 0 200 200" aria-hidden="true">
+        <defs>
+          <radialGradient id="haloGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity=".9"/>
+            <stop offset="40%" stop-color="#00adef" stop-opacity=".4"/>
+            <stop offset="100%" stop-color="#00adef" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="bigSilver" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#ffffff"/>
+            <stop offset="50%" stop-color="#c8ccd1"/>
+            <stop offset="100%" stop-color="#7a8086"/>
+          </linearGradient>
+        </defs>
+        <circle cx="100" cy="100" r="95" fill="url(#haloGrad)"/>
+        <circle cx="100" cy="100" r="70" fill="none" stroke="url(#bigSilver)" stroke-width="4"/>
+        <g fill="url(#bigSilver)" transform="translate(100 100)">
+          <polygon points="0,-58 6,-3 -6,-3"/>
+          <polygon points="0,-58 6,-3 -6,-3" transform="rotate(120)"/>
+          <polygon points="0,-58 6,-3 -6,-3" transform="rotate(240)"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Counters -->
+    <div class="counters">
+      <div class="counter"><span class="num" data-target="14">0</span><span class="suffix">+</span><label>años en HR</label></div>
+      <div class="counter"><span class="num" data-target="6">0</span><label>empresas</label></div>
+      <div class="counter"><span class="num" data-target="4">0</span><label>países EMEA</label></div>
+      <div class="counter"><span class="num" data-target="1">0</span><label>destino claro</label></div>
+    </div>
+
+    <!-- The letter -->
+    <div class="letter">
+      <p class="letter-open">Queridos compañeros y compañeras de Daimler Truck España,</p>
+      <p>He leído vuestra oferta de HR Business Partner para San Fernando de Henares y me ha pasado algo raro: parecía escrita mirando mi CV. Industria, multinacional, legislación laboral española, inglés alto, relaciones laborales, visión estratégica, cercanía con el negocio… <strong>llevo 14 años haciendo exactamente eso.</strong></p>
+      <p>Vengo del sector. <strong>Scania Ibérica</strong> me enseñó a hablar el idioma del camión: la cultura industrial, los tiempos de planta, los KPIs que de verdad importan. Y en <strong>Rovensa</strong>, como HR Manager EMEA de Operaciones Industriales, hago a diario lo que pide la oferta: acompaño a Plant Managers, lidero performance, sucesión, workforce planning, planes de igualdad, políticas HR y proceso colectivo con comités de empresa.</p>
+      <p>Diplomatura en Relaciones Laborales (URJC) y máster en Asesoría Laboral: la legislación laboral española no es un manual que tenga que abrir, es el suelo que piso desde el primer día. Inglés profesional, SAP SuccessFactors, Office 365 y la confidencialidad y empatía que esta función exige.</p>
+      <p>Y vivo en Getafe. San Fernando de Henares está, literalmente, a una parada de autobús.</p>
+      <p class="letter-close">Si me abrís la puerta de Daimler Truck,<br>os prometo un viaje que merecerá la pena para todos.</p>
+      <p class="signature">— Marta</p>
+    </div>
+
+    <div class="cta-buttons">
+      <a class="btn btn-primary" href="mailto:m.bejarano87@hotmail.es">✉ Abrir la puerta a Marta</a>
+      <a class="btn btn-ghost" href="tel:+34626171719">📞 +34 626 171 719</a>
+    </div>
+
+      <p class="final-line">Próxima parada · <span>Daimler Truck</span> · Bienvenida a bordo.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Hecho con ☕ para Marta · Próxima parada
+  <svg class="star-mini" viewBox="0 0 100 100" aria-hidden="true">
+    <circle cx="50" cy="50" r="46" fill="none" stroke="#7a8086" stroke-width="6"/>
+    <g fill="#7a8086" transform="translate(50 50)">
+      <polygon points="0,-38 4,-2 -4,-2"/>
+      <polygon points="0,-38 4,-2 -4,-2" transform="rotate(120)"/>
+      <polygon points="0,-38 4,-2 -4,-2" transform="rotate(240)"/>
+    </g>
+  </svg>
+  Mercedes-Benz
+</footer>
+
+<script>
+  // Welcome splash dismissal
+  const welcome = document.getElementById('welcome');
+  if(welcome){
+    welcome.addEventListener('animationend', (e)=>{
+      if(e.animationName === 'welcomeOut'){
+        welcome.classList.add('hidden');
+        document.body.classList.remove('welcome-active');
+      }
+    });
+  }
+
+  // Reveal stops on scroll
+  const stops = document.querySelectorAll('.stop');
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  },{threshold:.2});
+  stops.forEach(s=>observer.observe(s));
+
+  // Move bus marker along the road as user scrolls through the timeline
+  const timeline = document.getElementById('timeline');
+  const bus = document.getElementById('busMarker');
+  function updateBus(){
+    if(!timeline||!bus) return;
+    const rect = timeline.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const total = rect.height;
+    const scrolled = Math.min(Math.max(-rect.top + vh*0.45, 0), total);
+    const pct = scrolled / total;
+    bus.style.top = (pct * 100) + '%';
+  }
+  window.addEventListener('scroll', updateBus, {passive:true});
+  window.addEventListener('resize', updateBus);
+  updateBus();
+
+  // Reveal arrival CTA button when destination stop enters viewport
+  const destStop = document.querySelector('.stop.destination');
+  const arrivalCta = document.getElementById('arrivalCta');
+  if(destStop && arrivalCta){
+    new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) arrivalCta.classList.add('show');
+      });
+    },{threshold:.4}).observe(destStop);
+  }
+
+  // Counter animation
+  function runCounters(){
+    document.querySelectorAll('.counter .num').forEach(el=>{
+      const target = parseInt(el.dataset.target,10);
+      const duration = 1600;
+      const start = performance.now();
+      el.textContent = '0';
+      function tick(now){
+        const p = Math.min((now-start)/duration,1);
+        const eased = 1 - Math.pow(1-p,3);
+        el.textContent = Math.round(target*eased);
+        if(p<1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+
+  // Modal open/close
+  const modal = document.getElementById('arrivalModal');
+  const openBtn = document.getElementById('openArrival');
+  function openModal(){
+    modal.hidden = false;
+    document.body.classList.add('modal-open');
+    requestAnimationFrame(runCounters);
+  }
+  function closeModal(){
+    modal.hidden = true;
+    document.body.classList.remove('modal-open');
+  }
+  if(openBtn) openBtn.addEventListener('click', openModal);
+  modal.addEventListener('click', (e)=>{
+    if(e.target.dataset.close !== undefined) closeModal();
+  });
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && !modal.hidden) closeModal();
+  });
+</script>
+</body>
+</html>
