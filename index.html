@@ -490,16 +490,30 @@
 
   .arrival{
     position:relative;
-    padding:6rem 1.5rem 4rem;
+    padding:3rem 2.5rem;
     text-align:center;
     overflow:hidden;
     background:#000;
     isolation:isolate;
     border-radius:24px;
-    max-width:880px;width:100%;
+    max-width:1180px;width:100%;
     border:1px solid rgba(0,173,239,.25);
     box-shadow:0 40px 120px rgba(0,0,0,.8),0 0 80px rgba(0,173,239,.25);
     animation:modalIn .6s cubic-bezier(.22,.61,.36,1);
+  }
+  .arrival-inner{
+    display:grid;
+    grid-template-columns:1fr 1.2fr;
+    gap:2.5rem;
+    align-items:center;
+    max-width:100%;
+  }
+  .arrival-left{text-align:center}
+  .arrival-right{text-align:left}
+  @media(max-width:820px){
+    .arrival-inner{grid-template-columns:1fr;gap:1.5rem}
+    .arrival-right{text-align:center}
+    .arrival{padding:3rem 1.5rem}
   }
   @keyframes modalIn{
     from{opacity:0;transform:translateY(40px) scale(.96)}
@@ -540,7 +554,7 @@
   }
   @keyframes spinRays{to{transform:rotate(360deg)}}
 
-  .arrival-inner{max-width:780px;margin:0 auto;position:relative}
+  .arrival-inner{position:relative;max-width:100%;margin:0 auto}
 
   .arrival-kicker{
     display:inline-block;
@@ -551,8 +565,8 @@
     margin-bottom:1.5rem;
   }
   .arrival-title{
-    font-size:clamp(2.6rem,8vw,5.5rem);
-    color:#fff;line-height:1;margin-bottom:1rem;
+    font-size:clamp(2rem,5vw,3.6rem);
+    color:#fff;line-height:1;margin-bottom:.6rem;
     font-weight:700;
   }
   .arrival-title em{
@@ -563,8 +577,8 @@
   }
 
   .big-star-wrap{
-    margin:2rem auto 2.5rem;
-    width:min(280px,70vw);
+    margin:1.2rem auto 1.4rem;
+    width:min(170px,55%);
     animation:floatStar 6s ease-in-out infinite;
   }
   @keyframes floatStar{
@@ -579,11 +593,11 @@
   @keyframes rotateStar{to{transform:rotate(360deg)}}
 
   .counters{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;
-    max-width:640px;margin:0 auto 3rem;
+    display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;
+    max-width:340px;margin:0 auto;
   }
   .counter{
-    padding:1.2rem .6rem;
+    padding:.7rem .5rem;
     background:rgba(255,255,255,.03);
     border:1px solid rgba(255,255,255,.08);
     border-radius:12px;
@@ -591,7 +605,7 @@
   }
   .counter .num{
     font-family:'Bebas Neue',sans-serif;
-    font-size:clamp(2.2rem,6vw,3.4rem);
+    font-size:clamp(1.8rem,4vw,2.4rem);
     color:#fff;line-height:1;
     background:linear-gradient(180deg,#fff,#00adef);
     -webkit-background-clip:text;background-clip:text;color:transparent;
@@ -611,34 +625,34 @@
   }
 
   .letter{
-    max-width:640px;margin:0 auto 2.5rem;
+    max-width:100%;margin:0 0 1.2rem;
     text-align:left;
-    padding:2.2rem 2rem;
+    padding:1.4rem 1.5rem;
     background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(0,173,239,.04));
     border:1px solid rgba(255,255,255,.1);
-    border-radius:16px;
-    box-shadow:0 30px 80px rgba(0,0,0,.6);
+    border-radius:14px;
+    box-shadow:0 20px 50px rgba(0,0,0,.6);
     position:relative;
   }
   .letter::before{
     content:"";position:absolute;top:-1px;left:20%;right:20%;height:1px;
     background:linear-gradient(90deg,transparent,var(--mb-blue),transparent);
   }
-  .letter p{margin-bottom:1rem;color:#dfe3e8;font-size:1rem;line-height:1.75}
+  .letter p{margin-bottom:.7rem;color:#dfe3e8;font-size:.92rem;line-height:1.6}
   .letter strong{color:#fff;font-weight:600}
   .letter-open{color:var(--mb-blue)!important;font-weight:500}
   .letter-close{
     font-style:italic;color:#fff!important;
     border-left:3px solid var(--mb-blue);
-    padding-left:1rem;margin-top:1.5rem!important;
+    padding-left:.9rem;margin-top:1rem!important;
   }
   .signature{
     font-family:'Bebas Neue',sans-serif;
-    font-size:1.6rem;color:#fff!important;letter-spacing:.06em;
+    font-size:1.4rem;color:#fff!important;letter-spacing:.06em;
     margin-bottom:0!important;
   }
 
-  .arrival .cta-buttons{margin-bottom:2.5rem}
+  .arrival .cta-buttons{margin-bottom:0}
   .final-line{
     font-family:'Bebas Neue',sans-serif;
     font-size:1.1rem;letter-spacing:.3em;text-transform:uppercase;
@@ -1142,6 +1156,7 @@
     <div class="arrival-rays" aria-hidden="true"></div>
 
     <div class="arrival-inner">
+    <div class="arrival-left">
     <span class="arrival-kicker">Final de trayecto</span>
     <h2 class="arrival-title" id="arrivalTitle">Estación término<br><em>Daimler Truck</em></h2>
 
@@ -1177,7 +1192,9 @@
       <div class="counter"><span class="num" data-target="4">0</span><label>países EMEA</label></div>
       <div class="counter"><span class="num" data-target="1">0</span><label>destino claro</label></div>
     </div>
+    </div>
 
+    <div class="arrival-right">
     <!-- The letter -->
     <div class="letter">
       <p class="letter-open">Queridos compañeros y compañeras de Daimler Truck,</p>
@@ -1192,6 +1209,7 @@
     <div class="cta-buttons">
       <a class="btn btn-primary" href="mailto:m.bejarano87@hotmail.es">✉ Abrir la puerta a Marta</a>
       <a class="btn btn-ghost" href="tel:+34626171719">📞 +34 626 171 719</a>
+    </div>
     </div>
 
     </div>
